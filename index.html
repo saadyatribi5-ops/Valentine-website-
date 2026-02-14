@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>To My Love 💕</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #ff9aa2, #ffb7b2, #ffdac1);
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .scene {
+      perspective: 1200px;
+      width: 90vw;
+      max-width: 420px;
+      height: 560px;
+      position: relative;
+    }
+
+    .envelope {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 1.5s ease-out;
+      cursor: pointer;
+    }
+
+    .envelope.open {
+      transform: rotateX(180deg) translateY(-50px);
+    }
+
+    .flap {
+      position: absolute;
+      width: 100%;
+      height: 58%;
+      background: linear-gradient(to bottom, #ff6b6b, #ee5253);
+      clip-path: polygon(0 0, 100% 0, 50% 68%);
+      transform-origin: top;
+      transition: transform 1.5s ease-out;
+      z-index: 3;
+    }
+
+    .envelope.open .flap {
+      transform: rotateX(180deg);
+    }
+
+    .pocket {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, #ff8787, #ff5252);
+      border-radius: 14px 14px 0 0;
+      z-index: 1;
+    }
+
+    .letter {
+      position: absolute;
+      width: 92%;
+      height: 74%;
+      background: #fff5f7;
+      border: 3px solid #ffebee;
+      border-radius: 14px;
+      left: 4%;
+      top: 10%;
+      padding: 20px;
+      box-sizing: border-box;
+      transform: translateY(160px) scale(0.9);
+      opacity: 0;
+      transition: all 1.8s ease-out 0.4s;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.18);
+      z-index: 2;
+      overflow-y: auto;
+      text-align: center;
+    }
+
+    .envelope.open .letter {
+      transform: translateY(0) scale(1);
+      opacity: 1;
+    }
+
+    .letter h1 {
+      margin: 10px 0 20px;
+      color: #c2185b;
+      font-size: 2.3rem;
+      font-weight: 800;
+    }
+
+    .letter p {
+      color: #555;
+      line-height: 1.7;
+      margin: 0 0 20px;
+      font-size: 1.1rem;
+    }
+
+    .photos {
+      display: flex;
+      overflow-x: auto;
+      gap: 12px;
+      padding: 15px 0;
+      scroll-snap-type: x mandatory;
+      margin: 25px 0;
+    }
+
+    .photos img {
+      width: 240px;
+      height: 320px;
+      object-fit: cover;
+      border-radius: 16px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+      flex-shrink: 0;
+      scroll-snap-align: center;
+      border: 2px solid #ffc1cc;
+    }
+
+    .signature {
+      margin-top: 30px;
+      font-style: italic;
+      color: #d81b60;
+      font-size: 1.3rem;
+      font-weight: 600;
+    }
+
+    /* Floating hearts on open */
+    .heart {
+      position: absolute;
+      font-size: 2rem;
+      user-select: none;
+      pointer-events: none;
+      animation: float 9s infinite linear;
+      opacity: 0.95;
+    }
+
+    @keyframes float {
+      0%   { transform: translateY(110vh) rotate(0deg); }
+      100% { transform: translateY(-30vh) rotate(1080deg); }
+    }
+
+    @media (max-width: 500px) {
+      .scene { height: 520px; }
+      .photos img { width: 200px; height: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="scene">
+  <div class="envelope" id="envelope">
+    <div class="pocket"></div>
+    <div class="flap"></div>
+    <div class="letter">
+      <h1>My Everything ❤️</h1>
+      
+      <p>Every single one of these moments with you feels like magic.</p>
+      <p>From late-night rides and silly faces, to cozy dinners and stolen kisses... you make my world brighter every single day.</p>
+      
+      <div class="photos">
+        <img src="https://files.catbox.moe/REPLACE1.jpg" alt="Us on the bike at night">
+        <img src="https://files.catbox.moe/REPLACE2.jpg" alt="Silly selfie together">
+        <img src="https://files.catbox.moe/REPLACE3.jpg" alt="Nighttime hangout">
+        <img src="https://files.catbox.moe/REPLACE4.jpg" alt="Car moment with lights">
+        <img src="https://files.catbox.moe/REPLACE5.jpg" alt="Daytime fun selfie">
+        <img src="https://files.catbox.moe/REPLACE6.jpg" alt="Kiss moment">
+        <img src="https://files.catbox.moe/REPLACE7.jpg" alt="Another cute selfie">
+        <img src="https://files.catbox.moe/REPLACE8.jpg" alt="Eating together">
+        <img src="https://files.catbox.moe/REPLACE9.jpg" alt="Playful pose">
+      </div>
+
+      <p style="font-size:1.5rem; margin:30px 0; color:#e91e63;">
+        <strong>I love you</strong> endlessly,<br>today, tomorrow, always ♾️
+      </p>
+      
+      <div class="signature">Your Saad forever 🫶</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const envelope = document.getElementById('envelope');
+  
+  envelope.addEventListener('click', () => {
+    envelope.classList.toggle('open');
+    
+    if (envelope.classList.contains('open')) {
+      for (let i = 0; i < 15; i++) {
+        createHeart();
+      }
+    }
+  });
+
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.innerHTML = ['❤️','💖','💕','💗','💓','🫶'][Math.floor(Math.random()*6)];
+    
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = (7 + Math.random() * 8) + 's';
+    heart.style.fontSize = (1.4 + Math.random() * 2.5) + 'rem';
+    heart.style.animationDelay = Math.random() * 1.5 + 's';
+    
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 16000);
+  }
+
+  // Uncomment to auto-open after 1.5s (good for testing)
+  // setTimeout(() => envelope.click(), 1500);
+</script>
+
+</body>
+</html>
